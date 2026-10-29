@@ -1273,7 +1273,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
           </g></g>
           <ellipse cx="160" cy="386" rx="110" ry="9" fill="#51483F" opacity=".1"/>
           <!-- Couple photo for the Haldi page (background already removed) -->
-          <image href="images/haldi-car.png" x="44" y="66" width="232" height="322" preserveAspectRatio="xMidYMax meet"/>
+          <image href="../images/haldi-car.png" x="44" y="66" width="232" height="322" preserveAspectRatio="xMidYMax meet"/>
           <!-- small katoris & marigolds at their feet -->
           <path d="M8 368 Q16 388 38 388 Q60 388 68 368Z" fill="url(#gBrass)" stroke="#A88850"/>
           <ellipse cx="38" cy="368" rx="30" ry="6" fill="#E7B850" stroke="#A88850"/>
@@ -1312,7 +1312,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
           </g>
           <ellipse cx="160" cy="390" rx="118" ry="9" fill="#51483F" opacity=".1"/>
           <!-- Couple photo for the Sangeet page (background already removed) -->
-          <image href="images/sangeet-car.png" x="30" y="74" width="260" height="319" preserveAspectRatio="xMidYMax meet"/>
+          <image href="../images/sangeet-car.png" x="30" y="74" width="260" height="319" preserveAspectRatio="xMidYMax meet"/>
           <!-- music notes -->
           <g transform="translate(22 170)"><g class="drift" fill="#9A4E57" stroke="#9A4E57" stroke-width="1.6">
             <path d="M0 0 V-24 L16 -28 V-4" fill="none"/><ellipse cx="-3.5" cy="0" rx="4.5" ry="3.4" stroke="none"/><ellipse cx="12.5" cy="-4" rx="4.5" ry="3.4" stroke="none"/>
@@ -1462,7 +1462,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
           <circle cx="160" cy="146" r="101" fill="none" stroke="#C5A46D" stroke-width=".7" stroke-dasharray="2 4"/>
           <ellipse cx="160" cy="291" rx="84" ry="7" fill="#51483F" opacity=".1"/>
           <!-- Couple photo for the Reception page (background already removed) -->
-          <image href="images/reception-car.png" x="65" y="10" width="190" height="282" preserveAspectRatio="xMidYMax meet"/>
+          <image href="../images/reception-car.png" x="65" y="10" width="190" height="282" preserveAspectRatio="xMidYMax meet"/>
           <g fill="#A8B5A0">
             <use href="#leaf" transform="translate(84 222) rotate(160) scale(1.5)"/>
             <use href="#leaf" transform="translate(84 222) rotate(100) scale(1.4)"/>
@@ -1808,12 +1808,12 @@ const WEDDING_CONFIG = {
 
   // Optional: URL of your own commissioned caricature (PNG/WebP with transparent
   // background works best). Leave "" to use the built-in illustration.
-  caricatureImageUrl: "images/main-car.png",
+  caricatureImageUrl: "../images/main-car.png",
 
   // BACKGROUND MUSIC — paste the URL (or relative path, e.g. "music.mp3") of a
   // licensed or personally owned instrumental track. It only plays after the
   // guest opens the invitation or taps the music button.
-  musicUrl: "music/our-song.mp3",
+  musicUrl: "../music/our-song.mp3",
   musicVolume: 0.35,
 
   // RSVP ENDPOINT — e.g. a Google Apps Script web-app URL (https://script.google.com/macros/s/.../exec).

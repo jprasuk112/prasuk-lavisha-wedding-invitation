@@ -400,6 +400,11 @@ a { color: inherit; }
   letter-spacing: .01em;
 }
 .names > span { display: block; }
+.names .parents {
+  margin: .5em 0 .1em;
+  font: italic 400 clamp(.95rem, 3.4vw, 1.15rem)/1.4 var(--serif);
+  letter-spacing: .02em; color: var(--ink-soft);
+}
 .names .amp {
   font-family: var(--script); font-weight: 400; color: var(--gold-deep);
   font-size: .62em; line-height: 1.1;
@@ -1068,8 +1073,10 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         <p class="kicker reveal">Together with our families</p>
         <h1 class="names reveal" id="hero-title" tabindex="-1" style="--delay:.1s">
           <span data-groom>Prasuk</span>
+          <span class="parents" data-groom-parents>(S/o Smt. Neelam &amp; Shri Manish Kumar Jain)</span>
           <span class="amp">&amp;</span>
           <span data-bride>Lavisha</span>
+          <span class="parents" data-bride-parents>(D/o Smt. Priya &amp; Shri Bharat Jain)</span>
         </h1>
         <p class="tagline reveal" style="--delay:.2s">We invite you to celebrate the beginning of our forever.</p>
       </div>
@@ -1545,7 +1552,9 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 const WEDDING_CONFIG = {
   couple: {
     groom: "Prasuk",
-    bride: "Lavisha"
+    bride: "Lavisha",
+    groomParents: "S/o Smt. Neelam & Shri Manish Kumar Jain",
+    brideParents: "D/o Smt. Priya & Shri Bharat Jain"
   },
 
   displayDates: "04 – 05 December 2026",
@@ -1796,6 +1805,8 @@ const WEDDING_CONFIG = {
   function applyCouple() {
     setText("[data-groom]", CFG.couple.groom);
     setText("[data-bride]", CFG.couple.bride);
+    setText("[data-groom-parents]", `(${CFG.couple.groomParents})`);
+    setText("[data-bride-parents]", `(${CFG.couple.brideParents})`);
     setText("[data-groom-initial]", CFG.couple.groom.charAt(0));
     setText("[data-bride-initial]", CFG.couple.bride.charAt(0));
     setText("[data-initials]", `${CFG.couple.groom.charAt(0)}\u00A0${CFG.couple.bride.charAt(0)}`);

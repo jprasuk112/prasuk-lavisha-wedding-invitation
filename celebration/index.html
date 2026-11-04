@@ -416,6 +416,7 @@ a { color: inherit; }
 .hero-dates::before, .hero-dates::after {
   content: ""; width: 7px; height: 7px; transform: rotate(45deg); border: 1px solid var(--gold);
 }
+.hero-venue { margin-top: 8px; font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 .greeting {
   max-width: 440px; margin: 22px auto 0; padding: 18px 8px;
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
@@ -626,6 +627,11 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 .field-error { font-size: .8rem; color: var(--error); }
 .field-error:empty { display: none; }
 .field-hint { font-size: .74rem; color: var(--ink-soft); text-align: right; }
+.field-hint.is-left { text-align: left; }
+.phone-input { position: relative; }
+.phone-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font: 400 16px/1 var(--sans); color: var(--ink-soft); pointer-events: none; }
+.phone-input .input { padding-left: 50px; }
+.input[readonly]:not(#bLink) { background: rgba(197, 164, 109, .08); color: var(--ink-soft); cursor: default; }
 
 .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .choice { position: relative; display: block; cursor: pointer; }
@@ -660,20 +666,32 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 .result-text { margin-top: 10px; font-size: .95rem; }
 .result-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
 
-.schedule { list-style: none; margin: 22px 0 0; padding: 0; text-align: left; }
-.schedule-day {
-  margin: 18px 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--hairline);
-  font: 500 .62rem/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft);
+.schedule { list-style: none; margin: 22px 0 0; padding: 0; text-align: left; display: grid; gap: 20px; }
+.tl-day-head { display: flex; align-items: center; gap: 12px; }
+.tl-date {
+  flex: none; width: 50px; height: 50px; display: grid; place-content: center; text-align: center;
+  border-radius: 50%; background: var(--cream); border: 1px solid var(--gold); color: var(--gold-deep);
 }
-.schedule-day:first-child { margin-top: 0; }
-.schedule-item {
-  width: 100%; display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: baseline;
-  padding: 10px 10px; border: 0; border-radius: 10px; background: none; cursor: pointer; text-align: left;
+.tl-date b { font: 600 1.25rem/1 var(--serif); }
+.tl-date small { font: 600 .52rem/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.tl-day-label { font: 500 .64rem/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.tl-events { list-style: none; margin: 6px 0 0 24px; padding: 2px 0; border-left: 1px dashed var(--gold); }
+.tl-item {
+  position: relative; width: 100%; display: grid; grid-template-columns: 1fr auto; column-gap: 10px; align-items: center;
+  padding: 10px 12px 10px 24px; border: 0; border-radius: 0 10px 10px 0; background: none; cursor: pointer; text-align: left;
+  color: inherit; transition: background-color .25s;
+}
+.tl-item::before {
+  content: ""; position: absolute; left: -6px; top: 50%; width: 10px; height: 10px;
+  transform: translateY(-50%) rotate(45deg); background: var(--ivory); border: 1.5px solid var(--gold-deep);
   transition: background-color .25s;
 }
-.schedule-item:hover { background: var(--cream); }
-.schedule-time { font: 600 .7rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
-.schedule-title { font: 500 1.2rem/1.25 var(--serif); }
+.tl-item:hover, .tl-item:focus-visible { background: var(--cream); }
+.tl-item:hover::before, .tl-item:focus-visible::before { background: var(--gold); }
+.tl-time { grid-column: 1; font: 600 .68rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
+.tl-title { grid-column: 1; margin-top: 2px; font: 500 1.2rem/1.25 var(--serif); }
+.tl-arrow { grid-column: 2; grid-row: 1 / span 2; width: 16px; height: 16px; color: var(--gold); transition: transform .25s; }
+.tl-item:hover .tl-arrow { transform: translateX(3px); }
 
 /* =========================================================================
    10. SVG ANIMATION HELPERS
@@ -1076,6 +1094,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
       <div class="hero-body">
         <p class="hero-dates reveal"><span data-display-dates>04 – 05 December 2026</span></p>
+        <p class="hero-venue reveal">Dream world resort</p>
 
         <div class="greeting reveal" style="--delay:.1s">
           <p class="salutation" data-salutation>Dear Guest,</p>
@@ -1511,8 +1530,19 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
         <div class="field">
           <label class="field-label" for="rsvpName">Your name</label>
-          <input class="input" id="rsvpName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="rsvpName-error" />
+          <input class="input" id="rsvpName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="rsvpName-hint rsvpName-error" />
+          <p class="field-hint is-left" id="rsvpName-hint" hidden>Linked to your invitation</p>
           <p class="field-error" id="rsvpName-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="rsvpMobile">Mobile number</label>
+          <div class="phone-input">
+            <span class="phone-prefix" aria-hidden="true">+91</span>
+            <input class="input" id="rsvpMobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="10-digit mobile number" required aria-describedby="rsvpMobile-hint rsvpMobile-error" />
+          </div>
+          <p class="field-hint is-left" id="rsvpMobile-hint" hidden>Linked to your invitation</p>
+          <p class="field-error" id="rsvpMobile-error" aria-live="polite"></p>
         </div>
 
         <fieldset id="rsvpAttend" aria-describedby="rsvpAttend-error">
@@ -1598,6 +1628,10 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         <input class="input" id="bName" type="text" maxlength="60" placeholder="e.g. Aditya or Sharma Family" />
       </div>
       <div class="field">
+        <label class="field-label" for="bMobile">Guest mobile number <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input class="input" id="bMobile" type="tel" inputmode="numeric" maxlength="14" placeholder="10-digit mobile number" />
+      </div>
+      <div class="field">
         <label class="field-label" for="bStyle">Invitation style</label>
         <select class="input" id="bStyle"></select>
       </div>
@@ -1625,7 +1659,9 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
    PERSONAL GUEST LINKS
    -----------------------------------------------------------------------------
-   Add ?to=<name>&style=<friend|family|formal> to the page address, e.g.
+   Add ?to=<name>&style=<friend|family|formal>&mobile=<10-digit number> to the
+   page address. A valid ?mobile= is filled in and locked on the RSVP form;
+   without it the guest must type their mobile number. e.g.
      index1.html?to=Aditya&style=friend
      index1.html?to=Sharma%20Family&style=family
      index1.html?to=Mr.%20and%20Mrs.%20Sharma&style=formal
@@ -1697,7 +1733,7 @@ const WEDDING_CONFIG = {
       date: "2026-12-05",
       displayDate: "05 December 2026",
       dayLabel: "Day Two · Saturday",
-      time: "12:00 PM onwards",
+      time: "12:10 PM onwards",
       caption: "Join us as we celebrate love, laughter, and a lifetime together."
     },
     {
@@ -1773,20 +1809,40 @@ const WEDDING_CONFIG = {
   // RSVP ENDPOINT — e.g. a Google Apps Script web-app URL (https://script.google.com/macros/s/.../exec).
   // Until this is set, the RSVP form runs in an honest preview mode and sends nothing.
   //
-  // Minimal Apps Script (Extensions → Apps Script in a Google Sheet, deploy as
-  // Web app, "Execute as: Me", "Who has access: Anyone"):
+  // Apps Script (Extensions → Apps Script in a Google Sheet, deploy as Web app,
+  // "Execute as: Me", "Who has access: Anyone"). One row per mobile number:
+  // a repeat RSVP from the same number updates that row instead of adding one.
   //
+  //   const MOBILE_COL = 9;
   //   function doPost(e) {
-  //     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-  //     const d = JSON.parse(e.postData.contents);
-  //     sheet.appendRow([new Date(), d.name, d.attendance, d.guests, d.message, d.invitedAs, d.style, d.side]);
-  //     return ContentService.createTextOutput(JSON.stringify({ result: "success" }))
-  //       .setMimeType(ContentService.MimeType.JSON);
+  //     const lock = LockService.getScriptLock();
+  //     lock.waitLock(10000);
+  //     try {
+  //       const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  //       const d = JSON.parse(e.postData.contents);
+  //       const mobile = String(d.mobile || "").replace(/\D/g, "").slice(-10);
+  //       if (!/^[6-9]\d{9}$/.test(mobile)) return json({ result: "error", message: "Invalid mobile number" });
+  //       const row = [new Date(), d.name, d.attendance, d.guests, d.message, d.invitedAs, d.style, d.side, "'+91" + mobile];
+  //       const last = sheet.getLastRow();
+  //       const existing = last ? sheet.getRange(1, MOBILE_COL, last, 1).getDisplayValues() : [];
+  //       const i = existing.findIndex((r) => String(r[0]).replace(/\D/g, "").slice(-10) === mobile);
+  //       if (i >= 0) {
+  //         sheet.getRange(i + 1, 1, 1, row.length).setValues([row]);
+  //         return json({ result: "success", updated: true });
+  //       }
+  //       sheet.appendRow(row);
+  //       return json({ result: "success", updated: false });
+  //     } finally {
+  //       lock.releaseLock();
+  //     }
+  //   }
+  //   function json(o) {
+  //     return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
   //   }
   // Which family this invitation is from; stored in the RSVP sheet.
   rsvpSide: "Groom",
 
-  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbzAKJPk60fCUeXl_P_115Ximswj1uPUUZgLJ2QEGVnqW84x79TweHC54etbDsG7yNJ-1Q/exec",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbx9cq_q_R8NEouHCWzOwAkEYOoyC2yKeqlKr0byUTOW6ZXQpMOBwzis-vJpiGUdmA6T3w/exec",
 
   // Optional fallback: a WhatsApp number with country code (e.g. "919876543210").
   // If set, guests can send their reply themselves when RSVP sending is unavailable.
@@ -1900,12 +1956,22 @@ const WEDDING_CONFIG = {
     setText("[data-countdown-label]", CFG.countdownLabel);
   }
 
-  /* ---------- 3. Personalised greeting (?to=&style=) ---------- */
+  /** Returns a valid 10-digit Indian mobile number (accepts +91 / 0 prefixes), or "". */
+  function normalizeIndianMobile(value) {
+    let d = String(value || "").replace(/\D/g, "");
+    if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+    else if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+    return /^[6-9]\d{9}$/.test(d) ? d : "";
+  }
+
+  /* ---------- 3. Personalised greeting (?to=&style=&mobile=) ---------- */
   function readGuest() {
     let name = "";
     let style = "";
+    let mobile = "";
     try {
       const params = new URLSearchParams(window.location.search);
+      mobile = normalizeIndianMobile(params.get("mobile"));
       name = cleanText(params.get("to") || "", 60);
       style = cleanText(params.get("style") || "", 20).toLowerCase();
     } catch (e) { /* malformed query — fall back to defaults */ }
@@ -1914,7 +1980,7 @@ const WEDDING_CONFIG = {
       style = name ? CFG.defaultStyleWithName : "default";
     }
     if (!styles[style]) style = "default";
-    return { name, displayName: name, style };
+    return { name, displayName: name, style, mobile };
   }
   const guest = readGuest();
 
@@ -2128,25 +2194,39 @@ const WEDDING_CONFIG = {
 
     // Schedule overview dialog
     const list = $("#scheduleList");
-    const addItem = (label, when, idx) => {
-      const li = el("li");
-      const b = el("button", "schedule-item");
-      b.type = "button";
-      b.appendChild(el("span", "schedule-time", when));
-      b.appendChild(el("span", "schedule-title", label));
-      b.addEventListener("click", () => { closeDialog($("#eventsDialog")); goTo(idx); });
-      li.appendChild(b);
-      list.appendChild(li);
-    };
+    const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    let dayEvents = null;
     let lastDate = "";
     CFG.events.forEach((ev) => {
       if (ev.date !== lastDate) {
         lastDate = ev.date;
-        list.appendChild(el("li", "schedule-day", `${ev.dayLabel} — ${ev.displayDate}`));
+        const [dd, month] = String(ev.displayDate).split(" ");
+        const day = el("li", "tl-day");
+        const head = el("div", "tl-day-head");
+        const badge = el("span", "tl-date");
+        badge.setAttribute("aria-hidden", "true");
+        badge.appendChild(el("b", null, dd));
+        badge.appendChild(el("small", null, (month || "").slice(0, 3)));
+        head.appendChild(badge);
+        head.appendChild(el("span", "tl-day-label", `${ev.dayLabel} · ${ev.displayDate}`));
+        day.appendChild(head);
+        dayEvents = el("ol", "tl-events");
+        day.appendChild(dayEvents);
+        list.appendChild(day);
       }
       const target = document.getElementById(ev.id);
-      const idx = target ? pages.indexOf(target.closest(".page")) : -1;
-      addItem(ev.title, ev.time, idx < 0 ? 0 : idx);
+      const found = target ? pages.indexOf(target.closest(".page")) : -1;
+      const idx = found < 0 ? 0 : found;
+      const li = el("li");
+      const b = el("button", "tl-item");
+      b.type = "button";
+      b.appendChild(el("span", "tl-time", ev.time));
+      b.appendChild(el("span", "tl-title", ev.title));
+      b.insertAdjacentHTML("beforeend", ARROW);
+      b.lastElementChild.classList.add("tl-arrow");
+      b.addEventListener("click", () => { closeDialog($("#eventsDialog")); goTo(idx); });
+      li.appendChild(b);
+      dayEvents.appendChild(li);
     });
     $("#eventsBtn").addEventListener("click", () => openDialog($("#eventsDialog")));
 
@@ -2303,7 +2383,7 @@ const WEDDING_CONFIG = {
       if (data && (data.result === "error" || data.success === false || data.ok === false)) {
         return { status: "error", detail: data.message || "rejected" };
       }
-      return { status: "success" };
+      return { status: "success", updated: !!(data && data.updated) };
     } catch (err) {
       return { status: "error", detail: err && err.name === "AbortError" ? "timeout" : "network" };
     } finally {
@@ -2317,6 +2397,7 @@ const WEDDING_CONFIG = {
     const lines = [
       `RSVP for the wedding of ${COUPLE}`,
       `Name: ${p.name}`,
+      `Mobile: ${p.mobile}`,
       `Reply: ${p.attendance === "accepts" ? "Joyfully accepts" : "Regretfully declines"}`
     ];
     if (p.attendance === "accepts") lines.push(`Attendees: ${p.guests}`);
@@ -2328,6 +2409,7 @@ const WEDDING_CONFIG = {
     const dialog = $("#rsvpDialog");
     const form = $("#rsvpForm");
     const nameInput = $("#rsvpName");
+    const mobileInput = $("#rsvpMobile");
     const guestsInput = $("#rsvpGuests");
     const guestsField = $("#guestsField");
     const message = $("#rsvpMessage");
@@ -2336,7 +2418,17 @@ const WEDDING_CONFIG = {
     const resultView = $("#rsvpResultView");
 
     guestsInput.max = String(MAX_GUESTS);
-    if (guest.name) nameInput.value = guest.name;
+    if (guest.name.length >= 2) {
+      nameInput.value = guest.name;
+      nameInput.readOnly = true;
+      $("#rsvpName-hint").hidden = false;
+    }
+    if (guest.mobile) {
+      mobileInput.value = guest.mobile;
+      mobileInput.readOnly = true;
+      mobileInput.required = false;
+      $("#rsvpMobile-hint").hidden = false;
+    }
     if (!RSVP_ENDPOINT) {
       $("#rsvpDemoNotice").hidden = false;
       $(".btn-label", submit).textContent = "Preview RSVP";
@@ -2367,6 +2459,7 @@ const WEDDING_CONFIG = {
     }));
     message.addEventListener("input", () => { $("#rsvpMessage-count").textContent = `${message.value.length} / 500`; });
     nameInput.addEventListener("input", () => setError("rsvpName", ""));
+    mobileInput.addEventListener("input", () => setError("rsvpMobile", ""));
 
     function setError(id, msg) {
       const field = document.getElementById(id);
@@ -2384,6 +2477,12 @@ const WEDDING_CONFIG = {
         setError("rsvpName", "Please share your name so the couple knows who is replying.");
         firstInvalid = firstInvalid || nameInput;
       } else setError("rsvpName", "");
+
+      const mobile = guest.mobile || normalizeIndianMobile(mobileInput.value);
+      if (!mobile) {
+        setError("rsvpMobile", "Please enter a valid 10-digit Indian mobile number.");
+        firstInvalid = firstInvalid || mobileInput;
+      } else setError("rsvpMobile", "");
 
       const att = attendance();
       if (!att) {
@@ -2403,6 +2502,7 @@ const WEDDING_CONFIG = {
       if (firstInvalid) { firstInvalid.focus(); return null; }
       return {
         name,
+        mobile: `+91${mobile}`,
         attendance: att,
         guests,
         message: cleanText(message.value, 500),
@@ -2444,6 +2544,7 @@ const WEDDING_CONFIG = {
           title.textContent = `Thank you, ${first}`;
           text.textContent = `Your RSVP has been sent to ${COUPLE}. You’ll be dearly missed — thank you for your love and blessings.`;
         }
+        if (result.updated) text.textContent = text.textContent.replace("has been sent to", "has been updated for");
       } else if (result.status === "demo") {
         icon.innerHTML = ICONS.info;
         title.textContent = "RSVP preview only";
@@ -2510,13 +2611,15 @@ const WEDDING_CONFIG = {
   }
 
   /* ---------- 11. Host link builder (?builder=1) ---------- */
-  function makeLink(name, style) {
+  function makeLink(name, style, mobile) {
     const u = new URL(window.location.href);
     u.search = "";
     u.hash = "";
     const n = cleanText(name || "", 60);
     if (n) u.searchParams.set("to", n);
     if (style && CFG.invitationStyles[style]) u.searchParams.set("style", style);
+    const m = normalizeIndianMobile(mobile);
+    if (m) u.searchParams.set("mobile", m);
     return u.toString();
   }
   window.WeddingInvite = { makeLink };
@@ -2528,14 +2631,16 @@ const WEDDING_CONFIG = {
     const d = $("#builderDialog");
     const nameIn = $("#bName");
     const styleIn = $("#bStyle");
+    const mobileIn = $("#bMobile");
     const out = $("#bLink");
     Object.keys(CFG.invitationStyles).filter((k) => k !== "default").forEach((k) => {
       const o = el("option", null, k.charAt(0).toUpperCase() + k.slice(1));
       o.value = k;
       styleIn.appendChild(o);
     });
-    const update = () => { out.value = makeLink(nameIn.value, styleIn.value); };
+    const update = () => { out.value = makeLink(nameIn.value, styleIn.value, mobileIn.value); };
     nameIn.addEventListener("input", update);
+    mobileIn.addEventListener("input", update);
     styleIn.addEventListener("change", update);
     update();
     $("#builderForm").addEventListener("submit", async (e) => {

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Prasuk &amp; Lavisha · Wedding Invitation · 05 December 2026</title>
-<meta name="description" content="Together with our families, Prasuk & Lavisha invite you to celebrate the beginning of their forever · 05 December 2026." />
+<title>Prasuk &amp; Lavisha · Wedding Invitation · 04–05 December 2026</title>
+<meta name="description" content="Together with our families, Prasuk & Lavisha invite you to celebrate the beginning of their forever · 04–05 December 2026." />
 <meta property="og:title" content="Prasuk & Lavisha · Wedding Invitation" />
-<meta property="og:description" content="We invite you to celebrate the beginning of our forever · 05 December 2026." />
+<meta property="og:description" content="We invite you to celebrate the beginning of our forever · 04–05 December 2026." />
 <meta name="theme-color" content="#FFFCF6" />
 
 <!-- Fonts: the page falls back to elegant system fonts if these fail to load -->
@@ -416,6 +416,7 @@ a { color: inherit; }
 .hero-dates::before, .hero-dates::after {
   content: ""; width: 7px; height: 7px; transform: rotate(45deg); border: 1px solid var(--gold);
 }
+.hero-venue { margin-top: 8px; font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 .greeting {
   max-width: 440px; margin: 22px auto 0; padding: 18px 8px;
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
@@ -558,6 +559,7 @@ a { color: inherit; }
 #help { --accent: #5F6F57; --bg: radial-gradient(110% 60% at 12% 8%, rgba(168,181,160,.26), transparent 60%), radial-gradient(90% 55% at 92% 96%, rgba(232,210,205,.35), transparent 60%), var(--ivory); }
 
 /* Chapter colour moods (all stay light) */
+#sangeet   { --accent: #9A4E57; --bg: radial-gradient(110% 60% at 88% 8%, rgba(232,210,205,.6), transparent 60%), radial-gradient(90% 55% at 8% 96%, rgba(197,164,109,.18), transparent 60%), var(--ivory); }
 #baraat    { --accent: #9A4E57; --bg: radial-gradient(110% 60% at 12% 8%, rgba(197,164,109,.2), transparent 60%), radial-gradient(90% 55% at 92% 96%, rgba(232,210,205,.5), transparent 60%), #FFFBF5; }
 #reception { --accent: #5F6F57; --bg: radial-gradient(110% 60% at 88% 8%, rgba(168,181,160,.28), transparent 60%), radial-gradient(90% 55% at 8% 96%, rgba(197,164,109,.16), transparent 60%), var(--ivory); }
 #phere     { --accent: #8E6F3E; --bg: radial-gradient(90% 50% at 50% 40%, rgba(247,215,155,.22), transparent 65%), radial-gradient(90% 55% at 50% 100%, rgba(232,210,205,.35), transparent 60%), var(--ivory); }
@@ -622,6 +624,11 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 .field-error { font-size: .8rem; color: var(--error); }
 .field-error:empty { display: none; }
 .field-hint { font-size: .74rem; color: var(--ink-soft); text-align: right; }
+.field-hint.is-left { text-align: left; }
+.phone-input { position: relative; }
+.phone-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font: 400 16px/1 var(--sans); color: var(--ink-soft); pointer-events: none; }
+.phone-input .input { padding-left: 50px; }
+.input[readonly]:not(#bLink) { background: rgba(197, 164, 109, .08); color: var(--ink-soft); cursor: default; }
 
 .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .choice { position: relative; display: block; cursor: pointer; }
@@ -656,20 +663,32 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 .result-text { margin-top: 10px; font-size: .95rem; }
 .result-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
 
-.schedule { list-style: none; margin: 22px 0 0; padding: 0; text-align: left; }
-.schedule-day {
-  margin: 18px 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--hairline);
-  font: 500 .62rem/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft);
+.schedule { list-style: none; margin: 22px 0 0; padding: 0; text-align: left; display: grid; gap: 20px; }
+.tl-day-head { display: flex; align-items: center; gap: 12px; }
+.tl-date {
+  flex: none; width: 50px; height: 50px; display: grid; place-content: center; text-align: center;
+  border-radius: 50%; background: var(--cream); border: 1px solid var(--gold); color: var(--gold-deep);
 }
-.schedule-day:first-child { margin-top: 0; }
-.schedule-item {
-  width: 100%; display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: baseline;
-  padding: 10px 10px; border: 0; border-radius: 10px; background: none; cursor: pointer; text-align: left;
+.tl-date b { font: 600 1.25rem/1 var(--serif); }
+.tl-date small { font: 600 .52rem/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.tl-day-label { font: 500 .64rem/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.tl-events { list-style: none; margin: 6px 0 0 24px; padding: 2px 0; border-left: 1px dashed var(--gold); }
+.tl-item {
+  position: relative; width: 100%; display: grid; grid-template-columns: 1fr auto; column-gap: 10px; align-items: center;
+  padding: 10px 12px 10px 24px; border: 0; border-radius: 0 10px 10px 0; background: none; cursor: pointer; text-align: left;
+  color: inherit; transition: background-color .25s;
+}
+.tl-item::before {
+  content: ""; position: absolute; left: -6px; top: 50%; width: 10px; height: 10px;
+  transform: translateY(-50%) rotate(45deg); background: var(--ivory); border: 1.5px solid var(--gold-deep);
   transition: background-color .25s;
 }
-.schedule-item:hover { background: var(--cream); }
-.schedule-time { font: 600 .7rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
-.schedule-title { font: 500 1.2rem/1.25 var(--serif); }
+.tl-item:hover, .tl-item:focus-visible { background: var(--cream); }
+.tl-item:hover::before, .tl-item:focus-visible::before { background: var(--gold); }
+.tl-time { grid-column: 1; font: 600 .68rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
+.tl-title { grid-column: 1; margin-top: 2px; font: 500 1.2rem/1.25 var(--serif); }
+.tl-arrow { grid-column: 2; grid-row: 1 / span 2; width: 16px; height: 16px; color: var(--gold); transition: transform .25s; }
+.tl-item:hover .tl-arrow { transform: translateX(3px); }
 
 /* =========================================================================
    10. SVG ANIMATION HELPERS
@@ -719,7 +738,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 </head>
 
 <body>
-<a class="skip-link" href="#baraat">Skip to the event details</a>
+<a class="skip-link" href="#sangeet">Skip to the event details</a>
 
 <!-- =========================================================================
      SVG SPRITE — reusable artwork (couple caricature, florals, mandala, motifs)
@@ -969,7 +988,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
       <span class="env-back"></span>
       <span class="env-card" aria-hidden="true">
         <span class="env-card-names"><span data-groom>Prasuk</span><i>&amp;</i><span data-bride>Lavisha</span></span>
-        <span class="env-card-date">05 · XII · 2026</span>
+        <span class="env-card-date">04 – 05 · XII · 2026</span>
       </span>
       <span class="env-front"></span>
       <span class="env-flap"></span>
@@ -988,7 +1007,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 <header class="topbar" id="topbar">
   <a class="monogram" href="#invitation" data-goto="0" aria-label="Back to the invitation"><span data-groom-initial>P</span><i>&amp;</i><span data-bride-initial>L</span></a>
   <p class="page-indicator" aria-label="Current page">
-    <span class="num"><span id="pageNum">01</span>&thinsp;/&thinsp;<span id="pageTotal">06</span></span>
+    <span class="num"><span id="pageNum">01</span>&thinsp;/&thinsp;<span id="pageTotal">07</span></span>
     <span class="name" id="pageName">Invitation</span>
   </p>
   <div class="topbar-actions">
@@ -1071,7 +1090,8 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
       </div>
 
       <div class="hero-body">
-        <p class="hero-dates reveal"><span data-display-dates>05 December 2026</span></p>
+        <p class="hero-dates reveal"><span data-display-dates>04 – 05 December 2026</span></p>
+        <p class="hero-venue reveal">Dream world resort</p>
 
         <div class="greeting reveal" style="--delay:.1s">
           <p class="salutation" data-salutation>Dear Guest,</p>
@@ -1090,18 +1110,62 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         </div>
 
         <div class="hero-actions reveal" style="--delay:.2s">
-          <a class="btn btn-primary" href="#baraat" data-goto="1">Begin the Celebration</a>
+          <a class="btn btn-primary" href="#sangeet" data-goto="1">Begin the Celebration</a>
           <button class="btn btn-ghost" type="button" data-open-rsvp>RSVP</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PAGE 2 · BARAAT ============ -->
-  <section class="page event-page" id="baraat" data-label="Baraat" data-num="02" aria-labelledby="baraat-title">
+  <!-- ============ PAGE 2 · SANGEET ============ -->
+  <section class="page event-page" id="sangeet" data-label="Sangeet" data-num="02" aria-labelledby="sangeet-title">
+    <svg class="corner corner--tr" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
+    <svg class="corner corner--bl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
+    <div class="event">
+      <figure class="event-art reveal">
+        <svg viewBox="0 0 320 400" role="img" aria-label="Prasuk and Lavisha dancing at their Sangeet beneath twinkling string lights">
+          <circle cx="160" cy="220" r="150" fill="url(#gHaloBlush)"/>
+          <!-- string lights -->
+          <path d="M10 30 Q85 95 160 40 Q235 95 310 30" fill="none" stroke="#9C8F80" stroke-width="1"/>
+          <g fill="#F6DA9C" style="filter: drop-shadow(0 0 4px #F3CF7E)">
+            <circle class="bulb" cx="40" cy="56" r="4.5"/>
+            <circle class="bulb" cx="70" cy="67" r="4.5" style="animation-delay:-.6s"/>
+            <circle class="bulb" cx="100" cy="69" r="4.5" style="animation-delay:-1.2s"/>
+            <circle class="bulb" cx="130" cy="62" r="4.5" style="animation-delay:-1.8s"/>
+            <circle class="bulb" cx="190" cy="62" r="4.5" style="animation-delay:-.3s"/>
+            <circle class="bulb" cx="220" cy="69" r="4.5" style="animation-delay:-.9s"/>
+            <circle class="bulb" cx="250" cy="67" r="4.5" style="animation-delay:-1.5s"/>
+            <circle class="bulb" cx="280" cy="56" r="4.5" style="animation-delay:-2.1s"/>
+          </g>
+          <ellipse cx="160" cy="390" rx="118" ry="9" fill="#51483F" opacity=".1"/>
+          <!-- Couple photo for the Sangeet page (background already removed) -->
+          <image href="../images/sangeet-car.png" x="30" y="74" width="260" height="319" preserveAspectRatio="xMidYMax meet"/>
+          <!-- music notes -->
+          <g transform="translate(22 170)"><g class="drift" fill="#9A4E57" stroke="#9A4E57" stroke-width="1.6">
+            <path d="M0 0 V-24 L16 -28 V-4" fill="none"/><ellipse cx="-3.5" cy="0" rx="4.5" ry="3.4" stroke="none"/><ellipse cx="12.5" cy="-4" rx="4.5" ry="3.4" stroke="none"/>
+          </g></g>
+          <g transform="translate(300 150)"><g class="drift" style="animation-delay:-2s" fill="#C5A46D" stroke="#C5A46D" stroke-width="1.6">
+            <path d="M0 0 V-22 Q7 -16 11 -12" fill="none"/><ellipse cx="-3.5" cy="0" rx="4.5" ry="3.4" stroke="none"/>
+          </g></g>
+          <g transform="translate(296 250)"><g class="drift" style="animation-delay:-3.5s" fill="#B5646A" stroke="#B5646A" stroke-width="1.4">
+            <path d="M0 0 V-16" fill="none"/><ellipse cx="-3" cy="0" rx="3.6" ry="2.8" stroke="none"/>
+          </g></g>
+          <!-- sparkles -->
+          <g transform="translate(24 250)"><path class="twinkle" d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2Z" fill="#C5A46D"/></g>
+          <g transform="translate(160 22)"><path class="twinkle" style="animation-delay:-1.6s" d="M0 -6 L1.5 -1.5 L6 0 L1.5 1.5 L0 6 L-1.5 1.5 L-6 0 L-1.5 -1.5Z" fill="#C5A46D"/></g>
+          <g transform="translate(70 110)"><path class="twinkle" style="animation-delay:-.8s" d="M0 -5 L1.3 -1.3 L5 0 L1.3 1.3 L0 5 L-1.3 1.3 L-5 0 L-1.3 -1.3Z" fill="#B5646A"/></g>
+          <use href="#bloom" transform="translate(18 384) scale(.8)"/><use href="#bloom" transform="translate(302 384) scale(.8)"/>
+        </svg>
+      </figure>
+      <div class="event-copy reveal" style="--delay:.15s" data-event-copy="sangeet"></div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 3 · BARAAT ============ -->
+  <section class="page event-page" id="baraat" data-label="Baraat" data-num="03" aria-labelledby="baraat-title">
     <svg class="corner corner--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
-    <div class="event">
+    <div class="event event--flip">
       <figure class="event-art reveal">
         <svg viewBox="0 0 320 300" role="img" aria-label="The groom wearing a floral sehra rides a decorated white horse">
           <circle cx="160" cy="160" r="135" fill="url(#gHaloGold)"/>
@@ -1162,11 +1226,11 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
     </div>
   </section>
 
-  <!-- ============ PAGE 3 · RECEPTION ============ -->
-  <section class="page event-page" id="reception" data-label="Reception" data-num="03" aria-labelledby="reception-title">
+  <!-- ============ PAGE 4 · RECEPTION ============ -->
+  <section class="page event-page" id="reception" data-label="Reception" data-num="04" aria-labelledby="reception-title">
     <svg class="corner corner--tr" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--bl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
-    <div class="event event--flip">
+    <div class="event">
       <figure class="event-art reveal">
         <svg viewBox="0 0 320 300" role="img" aria-label="Prasuk and Lavisha at their reception, framed by a golden floral hoop">
           <circle cx="160" cy="150" r="135" fill="url(#gHaloSage)"/>
@@ -1199,11 +1263,11 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
     </div>
   </section>
 
-  <!-- ============ PAGE 4 · PHERE ============ -->
-  <section class="page event-page" id="phere" data-label="Phere" data-num="04" aria-labelledby="phere-title">
+  <!-- ============ PAGE 5 · PHERE ============ -->
+  <section class="page event-page" id="phere" data-label="Phere" data-num="05" aria-labelledby="phere-title">
     <svg class="corner corner--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
-    <div class="event">
+    <div class="event event--flip">
       <figure class="event-art reveal">
         <svg viewBox="0 0 320 310" role="img" aria-label="The couple beneath a floral mandap before the sacred fire">
           <circle cx="160" cy="240" r="110" fill="url(#gFireGlow)"/>
@@ -1253,8 +1317,8 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
     </div>
   </section>
 
-  <!-- ============ PAGE 5 · VENUES ============ -->
-  <section class="page event-page" id="venues" data-label="Venues" data-num="05" aria-labelledby="venues-title">
+  <!-- ============ PAGE 6 · VENUES ============ -->
+  <section class="page event-page" id="venues" data-label="Venues" data-num="06" aria-labelledby="venues-title">
     <svg class="corner corner--tr" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--bl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <div class="closing-stack">
@@ -1289,13 +1353,13 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
           <span class="script">With love,</span>
           <span class="names-sm"><span data-groom>Prasuk</span> &amp; <span data-bride>Lavisha</span></span>
         </p>
-        <p class="footnote" data-display-dates>05 December 2026</p>
+        <p class="footnote" data-display-dates>04 – 05 December 2026</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ PAGE 6 · HERE TO HELP ============ -->
-  <section class="page event-page" id="help" data-label="Here to Help" data-num="06" aria-labelledby="help-title">
+  <!-- ============ PAGE 7 · HERE TO HELP ============ -->
+  <section class="page event-page" id="help" data-label="Here to Help" data-num="07" aria-labelledby="help-title">
     <svg class="corner corner--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <div class="help-wrap">
@@ -1328,8 +1392,19 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
         <div class="field">
           <label class="field-label" for="rsvpName">Your name</label>
-          <input class="input" id="rsvpName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="rsvpName-error" />
+          <input class="input" id="rsvpName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="rsvpName-hint rsvpName-error" />
+          <p class="field-hint is-left" id="rsvpName-hint" hidden>Linked to your invitation</p>
           <p class="field-error" id="rsvpName-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="rsvpMobile">Mobile number</label>
+          <div class="phone-input">
+            <span class="phone-prefix" aria-hidden="true">+91</span>
+            <input class="input" id="rsvpMobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="10-digit mobile number" required aria-describedby="rsvpMobile-hint rsvpMobile-error" />
+          </div>
+          <p class="field-hint is-left" id="rsvpMobile-hint" hidden>Linked to your invitation</p>
+          <p class="field-error" id="rsvpMobile-error" aria-live="polite"></p>
         </div>
 
         <fieldset id="rsvpAttend" aria-describedby="rsvpAttend-error">
@@ -1415,6 +1490,10 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         <input class="input" id="bName" type="text" maxlength="60" placeholder="e.g. Aditya or Sharma Family" />
       </div>
       <div class="field">
+        <label class="field-label" for="bMobile">Guest mobile number <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input class="input" id="bMobile" type="tel" inputmode="numeric" maxlength="14" placeholder="10-digit mobile number" />
+      </div>
+      <div class="field">
         <label class="field-label" for="bStyle">Invitation style</label>
         <select class="input" id="bStyle"></select>
       </div>
@@ -1442,10 +1521,12 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
    PERSONAL GUEST LINKS
    -----------------------------------------------------------------------------
-   Add ?to=<name>&style=<friend|family|formal> to the page address, e.g.
-     index.html?to=Aditya&style=friend
-     index.html?to=Sharma%20Family&style=family
-     index.html?to=Mr.%20and%20Mrs.%20Sharma&style=formal
+   Add ?to=<name>&style=<friend|family|formal>&mobile=<10-digit number> to the
+   page address. A valid ?mobile= is filled in and locked on the RSVP form;
+   without it the guest must type their mobile number. e.g.
+     index2.html?to=Aditya&style=friend
+     index2.html?to=Sharma%20Family&style=family
+     index2.html?to=Mr.%20and%20Mrs.%20Sharma&style=formal
    Tip: open the page with ?builder=1 for a small link generator, or run
      WeddingInvite.makeLink("Aditya", "friend")   in the browser console.
    ============================================================================= */
@@ -1455,7 +1536,7 @@ const WEDDING_CONFIG = {
     bride: "Lavisha"
   },
 
-  displayDates: "05 December 2026",
+  displayDates: "04 – 05 December 2026",
 
   // Countdown target — the Phere, 05 December 2026, 3:30 PM India Standard Time (UTC+05:30)
   weddingDate: "2026-12-05T15:30:00+05:30",
@@ -1464,11 +1545,20 @@ const WEDDING_CONFIG = {
   // The schedule — in page order. Dates & times are the official schedule.
   events: [
     {
+      id: "sangeet",
+      title: "Sangeet Night",
+      date: "2026-12-04",
+      displayDate: "04 December 2026",
+      dayLabel: "Day One · Friday",
+      time: "7:00 PM onwards",
+      caption: "An evening of music, laughter, and unforgettable memories."
+    },
+    {
       id: "baraat",
       title: "The Baraat",
       date: "2026-12-05",
       displayDate: "05 December 2026",
-      dayLabel: "Saturday",
+      dayLabel: "Day Two · Saturday",
       time: "9:00 AM",
       caption: "Let the celebrations begin!"
     },
@@ -1477,8 +1567,8 @@ const WEDDING_CONFIG = {
       title: "Wedding Reception",
       date: "2026-12-05",
       displayDate: "05 December 2026",
-      dayLabel: "Saturday",
-      time: "12:00 PM onwards",
+      dayLabel: "Day Two · Saturday",
+      time: "12:10 PM onwards",
       caption: "Join us as we celebrate love, laughter, and a lifetime together."
     },
     {
@@ -1486,7 +1576,7 @@ const WEDDING_CONFIG = {
       title: "The Sacred Phere",
       date: "2026-12-05",
       displayDate: "05 December 2026",
-      dayLabel: "Saturday",
+      dayLabel: "Day Two · Saturday",
       time: "3:30 PM",
       caption: "Two hearts, seven sacred promises, and one beautiful forever."
     }
@@ -1497,7 +1587,7 @@ const WEDDING_CONFIG = {
   venues: [
     {
       id: "venue-dec4-5",
-      dateLabel: "Saturday · 05 December 2026",
+      dateLabel: "Friday & Saturday · 04 – 05 December 2026",
       name: "Dream world resort",
       address: "ADD_DEC4_5_ADDRESS",
       mapsUrl: "https://maps.app.goo.gl/tbZg5q1Mdi85vXmD6"
@@ -1554,20 +1644,40 @@ const WEDDING_CONFIG = {
   // RSVP ENDPOINT — e.g. a Google Apps Script web-app URL (https://script.google.com/macros/s/.../exec).
   // Until this is set, the RSVP form runs in an honest preview mode and sends nothing.
   //
-  // Minimal Apps Script (Extensions → Apps Script in a Google Sheet, deploy as
-  // Web app, "Execute as: Me", "Who has access: Anyone"):
+  // Apps Script (Extensions → Apps Script in a Google Sheet, deploy as Web app,
+  // "Execute as: Me", "Who has access: Anyone"). One row per mobile number:
+  // a repeat RSVP from the same number updates that row instead of adding one.
   //
+  //   const MOBILE_COL = 9;
   //   function doPost(e) {
-  //     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-  //     const d = JSON.parse(e.postData.contents);
-  //     sheet.appendRow([new Date(), d.name, d.attendance, d.guests, d.message, d.invitedAs, d.style, d.side]);
-  //     return ContentService.createTextOutput(JSON.stringify({ result: "success" }))
-  //       .setMimeType(ContentService.MimeType.JSON);
+  //     const lock = LockService.getScriptLock();
+  //     lock.waitLock(10000);
+  //     try {
+  //       const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  //       const d = JSON.parse(e.postData.contents);
+  //       const mobile = String(d.mobile || "").replace(/\D/g, "").slice(-10);
+  //       if (!/^[6-9]\d{9}$/.test(mobile)) return json({ result: "error", message: "Invalid mobile number" });
+  //       const row = [new Date(), d.name, d.attendance, d.guests, d.message, d.invitedAs, d.style, d.side, "'+91" + mobile];
+  //       const last = sheet.getLastRow();
+  //       const existing = last ? sheet.getRange(1, MOBILE_COL, last, 1).getDisplayValues() : [];
+  //       const i = existing.findIndex((r) => String(r[0]).replace(/\D/g, "").slice(-10) === mobile);
+  //       if (i >= 0) {
+  //         sheet.getRange(i + 1, 1, 1, row.length).setValues([row]);
+  //         return json({ result: "success", updated: true });
+  //       }
+  //       sheet.appendRow(row);
+  //       return json({ result: "success", updated: false });
+  //     } finally {
+  //       lock.releaseLock();
+  //     }
+  //   }
+  //   function json(o) {
+  //     return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
   //   }
   // Which family this invitation is from; stored in the RSVP sheet.
   rsvpSide: "Groom",
 
-  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbzAKJPk60fCUeXl_P_115Ximswj1uPUUZgLJ2QEGVnqW84x79TweHC54etbDsG7yNJ-1Q/exec",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbx9cq_q_R8NEouHCWzOwAkEYOoyC2yKeqlKr0byUTOW6ZXQpMOBwzis-vJpiGUdmA6T3w/exec",
 
   // Optional fallback: a WhatsApp number with country code (e.g. "919876543210").
   // If set, guests can send their reply themselves when RSVP sending is unavailable.
@@ -1681,12 +1791,22 @@ const WEDDING_CONFIG = {
     setText("[data-countdown-label]", CFG.countdownLabel);
   }
 
-  /* ---------- 3. Personalised greeting (?to=&style=) ---------- */
+  /** Returns a valid 10-digit Indian mobile number (accepts +91 / 0 prefixes), or "". */
+  function normalizeIndianMobile(value) {
+    let d = String(value || "").replace(/\D/g, "");
+    if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+    else if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+    return /^[6-9]\d{9}$/.test(d) ? d : "";
+  }
+
+  /* ---------- 3. Personalised greeting (?to=&style=&mobile=) ---------- */
   function readGuest() {
     let name = "";
     let style = "";
+    let mobile = "";
     try {
       const params = new URLSearchParams(window.location.search);
+      mobile = normalizeIndianMobile(params.get("mobile"));
       name = cleanText(params.get("to") || "", 60);
       style = cleanText(params.get("style") || "", 20).toLowerCase();
     } catch (e) { /* malformed query — fall back to defaults */ }
@@ -1695,7 +1815,7 @@ const WEDDING_CONFIG = {
       style = name ? CFG.defaultStyleWithName : "default";
     }
     if (!styles[style]) style = "default";
-    return { name, displayName: name, style };
+    return { name, displayName: name, style, mobile };
   }
   const guest = readGuest();
 
@@ -1909,25 +2029,39 @@ const WEDDING_CONFIG = {
 
     // Schedule overview dialog
     const list = $("#scheduleList");
-    const addItem = (label, when, idx) => {
-      const li = el("li");
-      const b = el("button", "schedule-item");
-      b.type = "button";
-      b.appendChild(el("span", "schedule-time", when));
-      b.appendChild(el("span", "schedule-title", label));
-      b.addEventListener("click", () => { closeDialog($("#eventsDialog")); goTo(idx); });
-      li.appendChild(b);
-      list.appendChild(li);
-    };
+    const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    let dayEvents = null;
     let lastDate = "";
     CFG.events.forEach((ev) => {
       if (ev.date !== lastDate) {
         lastDate = ev.date;
-        list.appendChild(el("li", "schedule-day", `${ev.dayLabel} — ${ev.displayDate}`));
+        const [dd, month] = String(ev.displayDate).split(" ");
+        const day = el("li", "tl-day");
+        const head = el("div", "tl-day-head");
+        const badge = el("span", "tl-date");
+        badge.setAttribute("aria-hidden", "true");
+        badge.appendChild(el("b", null, dd));
+        badge.appendChild(el("small", null, (month || "").slice(0, 3)));
+        head.appendChild(badge);
+        head.appendChild(el("span", "tl-day-label", `${ev.dayLabel} · ${ev.displayDate}`));
+        day.appendChild(head);
+        dayEvents = el("ol", "tl-events");
+        day.appendChild(dayEvents);
+        list.appendChild(day);
       }
       const target = document.getElementById(ev.id);
-      const idx = target ? pages.indexOf(target.closest(".page")) : -1;
-      addItem(ev.title, ev.time, idx < 0 ? 0 : idx);
+      const found = target ? pages.indexOf(target.closest(".page")) : -1;
+      const idx = found < 0 ? 0 : found;
+      const li = el("li");
+      const b = el("button", "tl-item");
+      b.type = "button";
+      b.appendChild(el("span", "tl-time", ev.time));
+      b.appendChild(el("span", "tl-title", ev.title));
+      b.insertAdjacentHTML("beforeend", ARROW);
+      b.lastElementChild.classList.add("tl-arrow");
+      b.addEventListener("click", () => { closeDialog($("#eventsDialog")); goTo(idx); });
+      li.appendChild(b);
+      dayEvents.appendChild(li);
     });
     $("#eventsBtn").addEventListener("click", () => openDialog($("#eventsDialog")));
 
@@ -2084,7 +2218,7 @@ const WEDDING_CONFIG = {
       if (data && (data.result === "error" || data.success === false || data.ok === false)) {
         return { status: "error", detail: data.message || "rejected" };
       }
-      return { status: "success" };
+      return { status: "success", updated: !!(data && data.updated) };
     } catch (err) {
       return { status: "error", detail: err && err.name === "AbortError" ? "timeout" : "network" };
     } finally {
@@ -2098,6 +2232,7 @@ const WEDDING_CONFIG = {
     const lines = [
       `RSVP for the wedding of ${COUPLE}`,
       `Name: ${p.name}`,
+      `Mobile: ${p.mobile}`,
       `Reply: ${p.attendance === "accepts" ? "Joyfully accepts" : "Regretfully declines"}`
     ];
     if (p.attendance === "accepts") lines.push(`Attendees: ${p.guests}`);
@@ -2109,6 +2244,7 @@ const WEDDING_CONFIG = {
     const dialog = $("#rsvpDialog");
     const form = $("#rsvpForm");
     const nameInput = $("#rsvpName");
+    const mobileInput = $("#rsvpMobile");
     const guestsInput = $("#rsvpGuests");
     const guestsField = $("#guestsField");
     const message = $("#rsvpMessage");
@@ -2117,7 +2253,17 @@ const WEDDING_CONFIG = {
     const resultView = $("#rsvpResultView");
 
     guestsInput.max = String(MAX_GUESTS);
-    if (guest.name) nameInput.value = guest.name;
+    if (guest.name.length >= 2) {
+      nameInput.value = guest.name;
+      nameInput.readOnly = true;
+      $("#rsvpName-hint").hidden = false;
+    }
+    if (guest.mobile) {
+      mobileInput.value = guest.mobile;
+      mobileInput.readOnly = true;
+      mobileInput.required = false;
+      $("#rsvpMobile-hint").hidden = false;
+    }
     if (!RSVP_ENDPOINT) {
       $("#rsvpDemoNotice").hidden = false;
       $(".btn-label", submit).textContent = "Preview RSVP";
@@ -2148,6 +2294,7 @@ const WEDDING_CONFIG = {
     }));
     message.addEventListener("input", () => { $("#rsvpMessage-count").textContent = `${message.value.length} / 500`; });
     nameInput.addEventListener("input", () => setError("rsvpName", ""));
+    mobileInput.addEventListener("input", () => setError("rsvpMobile", ""));
 
     function setError(id, msg) {
       const field = document.getElementById(id);
@@ -2165,6 +2312,12 @@ const WEDDING_CONFIG = {
         setError("rsvpName", "Please share your name so the couple knows who is replying.");
         firstInvalid = firstInvalid || nameInput;
       } else setError("rsvpName", "");
+
+      const mobile = guest.mobile || normalizeIndianMobile(mobileInput.value);
+      if (!mobile) {
+        setError("rsvpMobile", "Please enter a valid 10-digit Indian mobile number.");
+        firstInvalid = firstInvalid || mobileInput;
+      } else setError("rsvpMobile", "");
 
       const att = attendance();
       if (!att) {
@@ -2184,6 +2337,7 @@ const WEDDING_CONFIG = {
       if (firstInvalid) { firstInvalid.focus(); return null; }
       return {
         name,
+        mobile: `+91${mobile}`,
         attendance: att,
         guests,
         message: cleanText(message.value, 500),
@@ -2225,6 +2379,7 @@ const WEDDING_CONFIG = {
           title.textContent = `Thank you, ${first}`;
           text.textContent = `Your RSVP has been sent to ${COUPLE}. You’ll be dearly missed — thank you for your love and blessings.`;
         }
+        if (result.updated) text.textContent = text.textContent.replace("has been sent to", "has been updated for");
       } else if (result.status === "demo") {
         icon.innerHTML = ICONS.info;
         title.textContent = "RSVP preview only";
@@ -2291,13 +2446,15 @@ const WEDDING_CONFIG = {
   }
 
   /* ---------- 11. Host link builder (?builder=1) ---------- */
-  function makeLink(name, style) {
+  function makeLink(name, style, mobile) {
     const u = new URL(window.location.href);
     u.search = "";
     u.hash = "";
     const n = cleanText(name || "", 60);
     if (n) u.searchParams.set("to", n);
     if (style && CFG.invitationStyles[style]) u.searchParams.set("style", style);
+    const m = normalizeIndianMobile(mobile);
+    if (m) u.searchParams.set("mobile", m);
     return u.toString();
   }
   window.WeddingInvite = { makeLink };
@@ -2309,14 +2466,16 @@ const WEDDING_CONFIG = {
     const d = $("#builderDialog");
     const nameIn = $("#bName");
     const styleIn = $("#bStyle");
+    const mobileIn = $("#bMobile");
     const out = $("#bLink");
     Object.keys(CFG.invitationStyles).filter((k) => k !== "default").forEach((k) => {
       const o = el("option", null, k.charAt(0).toUpperCase() + k.slice(1));
       o.value = k;
       styleIn.appendChild(o);
     });
-    const update = () => { out.value = makeLink(nameIn.value, styleIn.value); };
+    const update = () => { out.value = makeLink(nameIn.value, styleIn.value, mobileIn.value); };
     nameIn.addEventListener("input", update);
+    mobileIn.addEventListener("input", update);
     styleIn.addEventListener("change", update);
     update();
     $("#builderForm").addEventListener("submit", async (e) => {

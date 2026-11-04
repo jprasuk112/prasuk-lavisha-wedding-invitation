@@ -486,6 +486,18 @@ a { color: inherit; }
   max-width: 24ch; margin: 0 auto;
   font: italic 400 clamp(1.3rem, 4.2vw, 1.65rem)/1.4 var(--serif);
 }
+.event-theme { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.event-theme-label { font: 500 .62rem/1.4 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
+.theme-palette { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.theme-swatch {
+  display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px 6px 6px;
+  border: 1px solid var(--hairline); border-radius: 999px; background: rgba(255, 252, 246, .75);
+  font: 500 1.05rem/1 var(--serif); color: var(--ink);
+}
+.theme-swatch::before {
+  content: ""; width: 26px; height: 26px; border-radius: 50%; background: var(--swatch);
+  box-shadow: inset 0 0 0 1px rgba(81, 72, 63, .12), 0 2px 6px -2px rgba(81, 72, 63, .3);
+}
 
 /* Venue card */
 .venue {
@@ -988,7 +1000,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
       <span class="env-back"></span>
       <span class="env-card" aria-hidden="true">
         <span class="env-card-names"><span data-groom>Prasuk</span><i>&amp;</i><span data-bride>Lavisha</span></span>
-        <span class="env-card-date">04 – 05 · XII · 2026</span>
+        <span class="env-card-date">04 – 05 · Dec · 2026</span>
       </span>
       <span class="env-front"></span>
       <span class="env-flap"></span>
@@ -1941,6 +1953,21 @@ const WEDDING_CONFIG = {
       frag.appendChild(el("p", "event-time", ev.time));
       frag.appendChild(cloneTemplate("tpl-divider"));
       frag.appendChild(el("p", "event-caption", `“${ev.caption}”`));
+      const colors = ev.theme && Array.isArray(ev.theme.colors)
+        ? ev.theme.colors.filter((c) => c && c.name && /^#[0-9a-f]{3,8}$/i.test(c.hex || ""))
+        : [];
+      if (colors.length) {
+        const theme = el("div", "event-theme");
+        theme.appendChild(el("p", "event-theme-label", cleanText(ev.theme.label || "Theme", 40)));
+        const palette = el("ul", "theme-palette");
+        colors.forEach((c) => {
+          const chip = el("li", "theme-swatch", cleanText(c.name, 40));
+          chip.style.setProperty("--swatch", c.hex);
+          palette.appendChild(chip);
+        });
+        theme.appendChild(palette);
+        frag.appendChild(theme);
+      }
       host.replaceChildren(frag);
     });
   }

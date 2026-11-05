@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lavisha & Prasuk Wedding Countdown</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #050303;
+  color: white;
+  font-family: 'Orbitron', monospace;
+}
+
+#backgroundVideo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+  opacity: 0.85;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at center, transparent 5%, rgba(0,0,0,.55) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.55), rgba(20,0,0,.15), rgba(0,0,0,.55));
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.top-label {
+  font-size: 11px;
+  letter-spacing: 8px;
+  color: #e6b6b6;
+  margin-bottom: 25px;
+  text-shadow: 0 0 15px red;
+}
+
+h1 {
+  font-size: clamp(25px, 5vw, 60px);
+  font-weight: 900;
+  letter-spacing: 5px;
+  margin: 0;
+  text-shadow: 0 0 30px #ff000077;
+}
+
+h1 span {
+  color: #e50914;
+}
+
+.subtitle {
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 6px;
+  color: #aaa;
+}
+
+.divider {
+  width: 130px;
+  height: 1px;
+  background: #e50914;
+  margin: 40px 0;
+  box-shadow: 0 0 15px red;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(8px, 3vw, 35px);
+  width: 100%;
+  max-width: 900px;
+}
+
+.unit {
+  flex: 1;
+  min-width: 0;
+}
+
+.number {
+  font-size: clamp(34px, 9vw, 100px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  text-shadow:
+    0 0 15px #ff0000aa,
+    0 0 45px #e5091488;
+}
+
+.unit-label {
+  margin-top: 18px;
+  font-size: clamp(8px, 1.5vw, 12px);
+  letter-spacing: 3px;
+  color: #bbb;
+}
+
+.separator {
+  color: #e50914;
+  font-size: clamp(30px, 7vw, 70px);
+  line-height: 1;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { opacity: .25; }
+}
+
+.release {
+  margin-top: 50px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #aaa;
+}
+
+.release strong {
+  display: block;
+  margin-top: 12px;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+button {
+  background: rgba(0,0,0,.4);
+  border: 1px solid #a3242a;
+  color: white;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover,
+button.active {
+  background: #e50914;
+  box-shadow: 0 0 20px #e5091488;
+}
+
+.footer {
+  position: fixed;
+  bottom: 22px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #aaa;
+  font-size: 9px;
+  letter-spacing: 4px;
+}
+
+.footer .return {
+  display: block;
+  margin-top: 10px;
+  color: #e6b6b6;
+  letter-spacing: 3px;
+}
+
+@media(max-width:480px) {
+  .countdown { gap: 5px; }
+  .number { font-size: clamp(27px, 8vw, 45px); }
+  .unit-label { letter-spacing: 1px; }
+  .separator { font-size: 24px; }
+  h1 { letter-spacing: 2px; }
+  .top-label { letter-spacing: 4px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Original supplied background video -->
+<video id="backgroundVideo" autoplay loop muted playsinline>
+  <source
+    src="https://media.rekydev.fr/avengerscountdown/background_mobile.webm"
+    type="video/webm">
+</video>
+
+<div class="overlay"></div>
+
+<main>
+  <div class="top-label">THE WEDDING COUNTDOWN</div>
+
+  <h1>LAVISHA <span>& PRASUK</span></h1>
+
+  <div class="subtitle">THE COUNTDOWN HAS BEGUN</div>
+
+  <div class="divider"></div>
+
+  <div class="countdown">
+    <div class="unit">
+      <div class="number" id="days">0</div>
+      <div class="unit-label">DAYS</div>
+    </div>
+
+    <div class="separator">:</div>
+
+    <div class="unit">
+      <div class="number" id="hours">00</div>
+      <div class="unit-label">HOURS</div>
+    </div>
+
+    <div class="separator">:</div>
+
+    <div class="unit">
+      <div class="number" id="minutes">00</div>
+      <div class="unit-label">MINUTES</div>
+    </div>
+
+    <div class="separator">:</div>
+
+    <div class="unit">
+      <div class="number" id="seconds">00</div>
+      <div class="unit-label">SECONDS</div>
+    </div>
+  </div>
+
+  <div class="release">
+    THE WEDDING
+    <strong>DECEMBER 5, 2026 · 3:30 PM</strong>
+  </div>
+
+  <div class="controls">
+    <button id="soundBtn">SOUND OFF</button>
+    <button id="fullscreenBtn">FULLSCREEN</button>
+  </div>
+</main>
+
+<div class="footer">
+  TIME IS RUNNING OUT
+  <span class="return">LAVISHA & PRASUK WILL RETURN IN AVENGERS: DOOMSDAY</span>
+</div>
+
+<script>
+const releaseDate = new Date("2026-12-05T15:30:00+05:30");
+
+const video = document.getElementById("backgroundVideo");
+const soundBtn = document.getElementById("soundBtn");
+
+let soundEnabled = false;
+
+function pad(value, length = 2) {
+  return String(value).padStart(length, "0");
+}
+
+function updateCountdown() {
+  const difference = releaseDate.getTime() - Date.now();
+
+  if (difference <= 0) {
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+
+    document.querySelector(".subtitle").textContent =
+      "THE DAY HAS ARRIVED";
+    return;
+  }
+
+  const days = Math.floor(difference / 86400000);
+  const hours = Math.floor((difference % 86400000) / 3600000);
+  const minutes = Math.floor((difference % 3600000) / 60000);
+  const seconds = Math.floor((difference % 60000) / 1000);
+
+  document.getElementById("days").textContent = String(days);
+  document.getElementById("hours").textContent = pad(hours);
+  document.getElementById("minutes").textContent = pad(minutes);
+  document.getElementById("seconds").textContent = pad(seconds);
+}
+
+// Only use the audio embedded in the supplied video.
+// No generated sounds or JavaScript oscillators.
+soundBtn.addEventListener("click", async () => {
+  if (!soundEnabled) {
+    try {
+      video.muted = false;
+      await video.play();
+
+      soundEnabled = true;
+      soundBtn.textContent = "SOUND ON";
+      soundBtn.classList.add("active");
+    } catch (error) {
+      video.muted = true;
+      soundEnabled = false;
+      soundBtn.textContent = "SOUND OFF";
+      console.error("Video audio could not be played:", error);
+    }
+  } else {
+    video.muted = true;
+    soundEnabled = false;
+    soundBtn.textContent = "SOUND OFF";
+    soundBtn.classList.remove("active");
+  }
+});
+
+// Fullscreen
+document.getElementById("fullscreenBtn").addEventListener("click", async () => {
+  try {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  } catch (error) {
+    console.error("Fullscreen unavailable:", error);
+  }
+});
+
+updateCountdown();
+setInterval(updateCountdown, 250);
+</script>
+
+</body>
+</html>

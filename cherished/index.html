@@ -12,7 +12,7 @@
 <!-- Fonts: the page falls back to elegant system fonts if these fail to load -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&family=Story+Script&display=swap" rel="stylesheet" />
 
 <!-- Without JavaScript: skip the envelope and show everything -->
 <noscript>
@@ -42,6 +42,7 @@
 
   --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
   --script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", "Segoe Script", cursive;
+  --salutation: "Story Script", "Cormorant Garamond", Georgia, serif;
   --sans: "Montserrat", "Lato", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --header-h: 60px;
@@ -172,7 +173,7 @@ a { color: inherit; }
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   text-align: center;
 }
-.env-salutation { font-family: var(--script); font-size: clamp(2.3rem, 9vw, 3.1rem); line-height: 1.1; color: var(--gold-deep); }
+.env-salutation { font-family: var(--salutation); font-size: clamp(2rem, 8vw, 2.7rem); line-height: 1.1; color: var(--gold-deep); }
 .env-title { font: 400 clamp(1.45rem, 5vw, 1.9rem)/1.2 var(--serif); letter-spacing: .03em; }
 .env-note { font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 
@@ -426,7 +427,7 @@ a { color: inherit; }
   max-width: 440px; margin: 22px auto 0; padding: 18px 8px;
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
 }
-.salutation { font-family: var(--script); font-size: clamp(2rem, 7vw, 2.6rem); line-height: 1.15; color: var(--gold-deep); }
+.salutation { font-family: var(--salutation); font-size: clamp(1.8rem, 6vw, 2.3rem); line-height: 1.15; color: var(--gold-deep); }
 .greeting-line { font: 400 1.18rem/1.5 var(--serif); margin-top: 4px; }
 
 /* Countdown */
@@ -597,6 +598,7 @@ a { color: inherit; }
 .signoff { margin-top: 26px; display: flex; flex-direction: column; align-items: center; }
 .signoff .script { font-size: clamp(2rem, 7vw, 2.6rem); color: var(--gold-deep); line-height: 1.1; }
 .signoff .names-sm { font: 500 clamp(1.8rem, 6vw, 2.4rem)/1.2 var(--serif); }
+.signoff .signoff-addr { margin-top: 4px; font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 .footnote { margin-top: 34px; font: 500 .6rem/1.6 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
 
 /* =========================================================================
@@ -1566,8 +1568,9 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
         <p class="thanks">Thank you for the love, laughter and blessings you bring into our lives. We can’t wait to celebrate with you.</p>
         <p class="signoff">
-          <span class="script">With love,</span>
-          <span class="names-sm"><span data-groom>Prasuk</span> &amp; <span data-bride>Lavisha</span></span>
+          <span class="script">Invited by</span>
+          <span class="names-sm">Manish Neelam Jain (Ajmera)</span>
+          <span class="signoff-addr">26 Godha Estate Premium, Indore</span>
         </p>
         <p class="footnote" data-display-dates>03 – 05 December 2026</p>
       </div>

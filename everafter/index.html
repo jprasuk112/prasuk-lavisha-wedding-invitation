@@ -12,7 +12,7 @@
 <!-- Fonts: the page falls back to elegant system fonts if these fail to load -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&family=Story+Script&display=swap" rel="stylesheet" />
 
 <!-- Without JavaScript: skip the envelope and show everything -->
 <noscript>
@@ -42,6 +42,7 @@
 
   --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
   --script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", "Segoe Script", cursive;
+  --salutation: "Story Script", "Cormorant Garamond", Georgia, serif;
   --sans: "Montserrat", "Lato", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --header-h: 60px;
@@ -172,7 +173,7 @@ a { color: inherit; }
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   text-align: center;
 }
-.env-salutation { font-family: var(--script); font-size: clamp(2.3rem, 9vw, 3.1rem); line-height: 1.1; color: var(--gold-deep); }
+.env-salutation { font-family: var(--salutation); font-size: clamp(2rem, 8vw, 2.7rem); line-height: 1.1; color: var(--gold-deep); }
 .env-title { font: 400 clamp(1.45rem, 5vw, 1.9rem)/1.2 var(--serif); letter-spacing: .03em; }
 .env-note { font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 
@@ -426,7 +427,7 @@ a { color: inherit; }
   max-width: 440px; margin: 22px auto 0; padding: 18px 8px;
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
 }
-.salutation { font-family: var(--script); font-size: clamp(2rem, 7vw, 2.6rem); line-height: 1.15; color: var(--gold-deep); }
+.salutation { font-family: var(--salutation); font-size: clamp(1.8rem, 6vw, 2.3rem); line-height: 1.15; color: var(--gold-deep); }
 .greeting-line { font: 400 1.18rem/1.5 var(--serif); margin-top: 4px; }
 
 /* Countdown */
@@ -578,8 +579,6 @@ a { color: inherit; }
 /* Chapter colour moods (all stay light) */
 #baraat    { --accent: #9A4E57; --bg: radial-gradient(110% 60% at 12% 8%, rgba(197,164,109,.2), transparent 60%), radial-gradient(90% 55% at 92% 96%, rgba(232,210,205,.5), transparent 60%), #FFFBF5; }
 #reception { --accent: #5F6F57; --bg: radial-gradient(110% 60% at 88% 8%, rgba(168,181,160,.28), transparent 60%), radial-gradient(90% 55% at 8% 96%, rgba(197,164,109,.16), transparent 60%), var(--ivory); }
-#phere     { --accent: #8E6F3E; --bg: radial-gradient(90% 50% at 50% 40%, rgba(247,215,155,.22), transparent 65%), radial-gradient(90% 55% at 50% 100%, rgba(232,210,205,.35), transparent 60%), var(--ivory); }
-
 #venues        { --accent: #8E6F3E; --bg: radial-gradient(90% 50% at 50% 30%, rgba(247,215,155,.18), transparent 65%), radial-gradient(90% 55% at 50% 100%, rgba(232,210,205,.35), transparent 60%), var(--ivory); }
 
 /* Closing (last page) */
@@ -592,6 +591,7 @@ a { color: inherit; }
 .signoff { margin-top: 26px; display: flex; flex-direction: column; align-items: center; }
 .signoff .script { font-size: clamp(2rem, 7vw, 2.6rem); color: var(--gold-deep); line-height: 1.1; }
 .signoff .names-sm { font: 500 clamp(1.8rem, 6vw, 2.4rem)/1.2 var(--serif); }
+.signoff .signoff-addr { margin-top: 4px; font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); }
 .footnote { margin-top: 34px; font: 500 .6rem/1.6 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
 
 /* =========================================================================
@@ -1023,7 +1023,7 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 <header class="topbar" id="topbar">
   <a class="monogram" href="#invitation" data-goto="0" aria-label="Back to the invitation"><span data-groom-initial>P</span><i>&amp;</i><span data-bride-initial>L</span></a>
   <p class="page-indicator" aria-label="Current page">
-    <span class="num"><span id="pageNum">01</span>&thinsp;/&thinsp;<span id="pageTotal">06</span></span>
+    <span class="num"><span id="pageNum">01</span>&thinsp;/&thinsp;<span id="pageTotal">05</span></span>
     <span class="name" id="pageName">Invitation</span>
   </p>
   <div class="topbar-actions">
@@ -1117,8 +1117,8 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         </div>
 
         <div class="countdown-wrap reveal" style="--delay:.15s" data-countdown-wrap>
-          <p class="cd-caption" data-countdown-label>Until the Sacred Phere · 05 Dec 2026 · 3:30 PM IST</p>
-          <div class="countdown" role="timer" aria-label="Time remaining until the wedding ceremony">
+          <p class="cd-caption" data-countdown-label>Until the Wedding Reception · 05 Dec 2026 · 12:10 PM IST</p>
+          <div class="countdown" role="timer" aria-label="Time remaining until the wedding reception">
             <div class="cd-unit"><span class="cd-num" data-unit="days">--</span><span class="cd-label">Days</span></div>
             <div class="cd-unit"><span class="cd-num" data-unit="hours">--</span><span class="cd-label">Hours</span></div>
             <div class="cd-unit"><span class="cd-num" data-unit="minutes">--</span><span class="cd-label">Minutes</span></div>
@@ -1237,62 +1237,8 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
     </div>
   </section>
 
-  <!-- ============ PAGE 4 · PHERE ============ -->
-  <section class="page event-page" id="phere" data-label="Phere" data-num="04" aria-labelledby="phere-title">
-    <svg class="corner corner--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
-    <svg class="corner corner--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
-    <div class="event">
-      <figure class="event-art reveal">
-        <svg viewBox="0 0 320 310" role="img" aria-label="The couple beneath a floral mandap before the sacred fire">
-          <circle cx="160" cy="240" r="110" fill="url(#gFireGlow)"/>
-          <path d="M40 96 Q160 -8 280 96Z" fill="url(#gCanopy)" stroke="#C5A46D" stroke-width="1.5"/>
-          <path d="M70 90 Q160 16 250 90" fill="none" stroke="#C5A46D" stroke-width=".7" stroke-dasharray="2 4"/>
-          <path d="M155 44 h10 l-2 -9 h-6z" fill="#C5A46D"/><circle cx="160" cy="31" r="3.2" fill="#C5A46D"/>
-          <path d="M40 96 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0 q10 11 20 0" fill="#E8D2CD" stroke="#C5A46D" stroke-width="1"/>
-          <path d="M36 92 H284 V99 H36Z" fill="#C5A46D"/>
-          <g fill="#FFFCF6" stroke="#C5A46D" stroke-width="1.2">
-            <path d="M48 99 H60 V282 H48Z"/><path d="M260 99 H272 V282 H260Z"/>
-            <path d="M44 99 H64 V106 H44Z"/><path d="M256 99 H276 V106 H256Z"/>
-            <path d="M44 274 H64 V282 H44Z"/><path d="M256 274 H276 V282 H256Z"/>
-          </g>
-          <path d="M54 110 V270" stroke="#E7B850" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 7"/>
-          <path d="M266 110 V270" stroke="#E7B850" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 7"/>
-          <path d="M60 104 Q110 156 160 108 Q210 156 260 104" fill="none" stroke="#E8D2CD" stroke-width="7" stroke-linecap="round" opacity=".9"/>
-          <path d="M60 104 Q110 156 160 108 Q210 156 260 104" fill="none" stroke="#C5A46D" stroke-width="1"/>
-          <g transform="translate(110 130)"><g class="sway"><path d="M0 0 V26" stroke="#C5A46D" stroke-width=".8"/><use href="#marigold" x="-6" y="24" width="12" height="12"/></g></g>
-          <g transform="translate(210 130)"><g class="sway" style="animation-delay:-2s"><path d="M0 0 V26" stroke="#C5A46D" stroke-width=".8"/><use href="#marigold" x="-6" y="24" width="12" height="12"/></g></g>
-          <use href="#couple" x="96" y="104" width="128" height="154"/>
-          <path d="M30 282 H290 V294 H30Z" fill="#F5EFE5" stroke="#C5A46D" stroke-width="1.2"/>
-          <!-- havan kund + sacred fire -->
-          <path d="M128 256 H192 V263 H128Z" fill="#C5A46D"/>
-          <path d="M132 263 H188 L180 282 H140Z" fill="url(#gBrass)" stroke="#8E6F3E" stroke-width="1"/>
-          <path d="M138 270 H182" stroke="#FFF3D6" stroke-width="1" stroke-dasharray="2 3"/>
-          <g transform="translate(160 257)">
-            <path class="flicker" d="M0 0 Q-17 -12 -5 -36 Q-1 -22 5 -42 Q18 -20 11 -6 Q8 0 0 0Z" fill="url(#gFlame)"/>
-            <path class="flicker d2" d="M-12 0 Q-20 -10 -12 -22 Q-8 -12 -4 -16 Q-2 -6 -6 0Z" fill="url(#gFlame)"/>
-            <path class="flicker d2" d="M12 0 Q20 -10 13 -24 Q9 -12 5 -14 Q3 -6 6 0Z" fill="url(#gFlame)"/>
-            <circle class="rise" cx="-6" cy="-40" r="1.4" fill="#F2B445"/>
-            <circle class="rise" style="animation-delay:-1.2s" cx="7" cy="-44" r="1.2" fill="#F2B445"/>
-            <circle class="rise" style="animation-delay:-2.1s" cx="0" cy="-48" r="1" fill="#F2B445"/>
-          </g>
-          <!-- seven lamps for the seven vows -->
-          <g fill="#C5A46D">
-            <g transform="translate(76 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(104 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker d2" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(132 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(160 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker d2" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(188 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(216 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker d2" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-            <g transform="translate(244 300)"><path d="M-6 0 Q0 5 6 0Z"/><path class="flicker" d="M0 -1 Q-3 -5 0 -10 Q3 -5 0 -1Z" fill="url(#gFlame)"/></g>
-          </g>
-        </svg>
-      </figure>
-      <div class="event-copy reveal" style="--delay:.15s" data-event-copy="phere"></div>
-    </div>
-  </section>
-
-  <!-- ============ PAGE 5 · VENUES ============ -->
-  <section class="page event-page" id="venues" data-label="Venues" data-num="05" aria-labelledby="venues-title">
+  <!-- ============ PAGE 4 · VENUES ============ -->
+  <section class="page event-page" id="venues" data-label="Venues" data-num="04" aria-labelledby="venues-title">
     <svg class="corner corner--tr" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--bl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <div class="closing-stack">
@@ -1310,8 +1256,8 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
         <p class="closing-text">Your presence and blessings would make our celebrations complete. As we take our seven sacred steps together, we would be honoured to have you beside us.</p>
 
         <div class="countdown-wrap" data-countdown-wrap>
-          <p class="cd-caption" data-countdown-label>Until the Sacred Phere · 05 Dec 2026 · 3:30 PM IST</p>
-          <div class="countdown" role="timer" aria-label="Time remaining until the wedding ceremony">
+          <p class="cd-caption" data-countdown-label>Until the Wedding Reception · 05 Dec 2026 · 12:10 PM IST</p>
+          <div class="countdown" role="timer" aria-label="Time remaining until the wedding reception">
             <div class="cd-unit"><span class="cd-num" data-unit="days">--</span><span class="cd-label">Days</span></div>
             <div class="cd-unit"><span class="cd-num" data-unit="hours">--</span><span class="cd-label">Hours</span></div>
             <div class="cd-unit"><span class="cd-num" data-unit="minutes">--</span><span class="cd-label">Minutes</span></div>
@@ -1324,16 +1270,17 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 
         <p class="thanks">Thank you for the love, laughter and blessings you bring into our lives. We can’t wait to celebrate with you.</p>
         <p class="signoff">
-          <span class="script">With love,</span>
-          <span class="names-sm"><span data-groom>Prasuk</span> &amp; <span data-bride>Lavisha</span></span>
+          <span class="script">Invited by</span>
+          <span class="names-sm">Manish Neelam Jain (Ajmera)</span>
+          <span class="signoff-addr">26 Godha Estate Premium, Indore</span>
         </p>
         <p class="footnote" data-display-dates>05 December 2026</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ PAGE 6 · HERE TO HELP ============ -->
-  <section class="page event-page" id="help" data-label="Here to Help" data-num="06" aria-labelledby="help-title">
+  <!-- ============ PAGE 5 · HERE TO HELP ============ -->
+  <section class="page event-page" id="help" data-label="Here to Help" data-num="05" aria-labelledby="help-title">
     <svg class="corner corner--tl" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <svg class="corner corner--br" viewBox="0 0 220 220" aria-hidden="true"><use href="#floral-corner" width="220" height="220"/></svg>
     <div class="help-wrap">
@@ -1514,9 +1461,9 @@ const WEDDING_CONFIG = {
 
   displayDates: "05 December 2026",
 
-  // Countdown target — the Phere, 05 December 2026, 3:30 PM India Standard Time (UTC+05:30)
-  weddingDate: "2026-12-05T15:30:00+05:30",
-  countdownLabel: "Until the Sacred Phere · 05 Dec 2026 · 3:30 PM IST",
+  // Countdown target — the Reception, 05 December 2026, 12:10 PM India Standard Time (UTC+05:30)
+  weddingDate: "2026-12-05T12:10:00+05:30",
+  countdownLabel: "Until the Wedding Reception · 05 Dec 2026 · 12:10 PM IST",
 
   // The schedule — in page order. Dates & times are the official schedule.
   events: [
@@ -1537,15 +1484,6 @@ const WEDDING_CONFIG = {
       dayLabel: "Saturday",
       time: "12:10 PM onwards",
       caption: "Join us as we celebrate love, laughter, and a lifetime together."
-    },
-    {
-      id: "phere",
-      title: "The Sacred Phere",
-      date: "2026-12-05",
-      displayDate: "05 December 2026",
-      dayLabel: "Saturday",
-      time: "3:30 PM",
-      caption: "Two hearts, seven sacred promises, and one beautiful forever."
     }
   ],
 
